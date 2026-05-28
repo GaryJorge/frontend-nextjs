@@ -1,4 +1,3 @@
-// src/app/page.tsx
 import styles from './principal.module.css';
 
 export default function Home() {

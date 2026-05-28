@@ -262,3 +262,74 @@
   margin-top: 10px;
   margin-bottom: 15px;
 }
+/* ==========================================
+   ESTILOS PARA CELULARES (MÁXIMO 768px)
+   ========================================== */
+@media (max-width: 768px) {
+  
+  /* Ajustamos el tamaño del título principal */
+  .logoArea h1 {
+    font-size: 1.6rem; 
+    letter-spacing: 1px;
+  }
+  
+  .subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+
+  /* El menú ya no irá en fila horizontal, se apilará en vertical */
+  .navbar {
+    flex-direction: column;
+    padding: 10px 0;
+  }
+
+  .navGroup {
+    width: 100%;
+    text-align: center;
+  }
+
+  .navLabel, .navLinkSingle {
+    padding: 12px 0;
+    border-bottom: 1px solid #262626;
+    width: 100%;
+  }
+
+  /* Hacemos que las subsecciones aparezcan debajo al tocar o pasar el dedo */
+  .dropdown {
+    position: relative; /* Ya no flota sobre el contenido */
+    width: 100%;
+    box-shadow: none;
+    border-top: none;
+    background-color: #262626; /* Un tono un poco más claro para diferenciar */
+  }
+
+  /* Ajustamos la sección principal (Hero) */
+  .hero {
+    height: 40vh; /* Más baja en celulares */
+  }
+
+  .heroOverlay h2 {
+    font-size: 1.6rem;
+  }
+
+  .heroOverlay p {
+    font-size: 0.9rem;
+  }
+
+  /* La sección de bienvenida reduce sus márgenes */
+  .welcomeSection {
+    padding: 30px 5%;
+  }
+
+  /* ¡La magia de la grilla! Pasa de 3 columnas a 1 sola columna */
+  .infoGrid {
+    grid-template-columns: 1fr; 
+    padding: 10px 5% 40px 5%;
+    gap: 20px;
+  }
+  
+  .card {
+    padding: 20px;
+  }
+}
