@@ -1,29 +1,23 @@
-/// src/app/page.tsx
-"use client"; // <-- IMPORTANTE: Esto le permite a Next.js usar interactividad
+"use client";
 
 import { useState } from 'react';
 import styles from './principal.module.css';
 
 export default function Home() {
-  // Estado para controlar si el menú hamburguesa general está abierto o cerrado
+  // Estado para el menú hamburguesa (celulares)
   const [menuAbierto, setMenuAbierto] = useState(false);
-
-  // Estado para rastrear qué submenú específico está abierto ('raza', 'salud', 'actividades', etc.)
+  
+  // Estado para rastrear qué submenú está desplegado
   const [submenuActivo, setSubmenuActivo] = useState<string | null>(null);
 
-  // Función lógica para alternar los submenús al hacer clic
+  // Lógica de "Interruptor": Si haces clic en el que ya está abierto, se vuelve null (se cierra)
   const toggleSubmenu = (nombreMenu: string) => {
-    if (submenuActivo === nombreMenu) {
-      setSubmenuActivo(null); // Si ya estaba abierto, dale clic de nuevo para cerrarlo
-    } else {
-      setSubmenuActivo(nombreMenu); // Si estaba cerrado, ábrelo y cierra cualquier otro que estuviera abierto
-    }
+    setSubmenuActivo(submenuActivo === nombreMenu ? null : nombreMenu);
   };
 
   return (
     <div className={styles.container}>
       
-      {/* HEADER E INSTITUCIONAL NAVBAR */}
       <header className={styles.header}>
         <div className={styles.topBar}>
           <p>Afiliado idealmente al Kennel Club Peruano (KCP)</p>
@@ -33,12 +27,11 @@ export default function Home() {
           <h1>BÓXER CLUB DEL PERÚ</h1>
           <p className={styles.subtitle}>Dedicados a la crianza, salud y preservación de la raza</p>
           
-          {/* BOTÓN DE 3 LÍNEAS (Solo se verá en celulares) */}
           <button 
             className={styles.hamburger} 
             onClick={() => {
               setMenuAbierto(!menuAbierto);
-              setSubmenuActivo(null); // Resetea y cierra los submenús si se cierra todo el menú móvil
+              setSubmenuActivo(null); // Al cerrar el menú móvil, cerramos cualquier submenú abierto
             }}
             aria-label="Menú de navegación"
           >
@@ -48,7 +41,6 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Agregamos una clase condicional: si menuAbierto es true, añade styles.active */}
         <nav className={`${styles.navbar} ${menuAbierto ? styles.active : ''}`}>
           
           {/* RAZA */}
@@ -140,6 +132,7 @@ export default function Home() {
               <a href="/camadas/contactanos">Contáctanos</a>
             </div>
           </div>
+
         </nav>
       </header>
 
