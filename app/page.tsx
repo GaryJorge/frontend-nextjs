@@ -90,9 +90,9 @@ export default function Home() {
               <a href="/eventos/especializadas">Especializadas</a>
               <a href="/eventos/match">Match</a>
               <a href="/eventos/ranking">Bóxer del Año (KCP)</a>
-              <a href="/actividades/macho">Bóxer macho del año</a>
-              <a href="/actividades/hembra">Bóxer hembra del año</a>
-              <a href="/actividades/joven">Bóxer joven del año</a>
+              <a href="/eventos/macho">Bóxer macho del año</a>
+              <a href="/eventos/hembra">Bóxer hembra del año</a>
+              <a href="/eventos/joven">Bóxer joven del año</a>
             </div>
           </div>
 
