@@ -262,74 +262,123 @@
   margin-top: 10px;
   margin-bottom: 15px;
 }
-/* ==========================================
-   ESTILOS PARA CELULARES (MÁXIMO 768px)
-   ========================================== */
+/* =======================================================
+   ESTILOS RESPONSIVOS MEJORADOS CON MENÚ HAMBURGUESA
+   ======================================================= */
 @media (max-width: 768px) {
   
-  /* Ajustamos el tamaño del título principal */
+  .logoArea {
+    position: relative; /* Para poder posicionar el botón a la derecha */
+    padding-bottom: 25px;
+  }
+
   .logoArea h1 {
-    font-size: 1.6rem; 
+    font-size: 1.5rem; 
     letter-spacing: 1px;
+    padding-right: 50px; /* Evita que el texto choque con el botón */
+    text-align: left;
   }
   
   .subtitle {
     font-size: 0.75rem;
-    letter-spacing: 1px;
+    letter-spacing: 0px;
+    text-align: left;
   }
 
-  /* El menú ya no irá en fila horizontal, se apilará en vertical */
-  .navbar {
+  /* DISEÑO DEL BOTÓN DE 3 LÍNEAS */
+  .hamburger {
+    display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 35px;
+    z-index: 20;
+  }
+
+  .line {
+    width: 30px;
+    height: 3px;
+    background-color: #4a0404; /* Color guinda para combinar */
+    transition: all 0.3s ease;
+  }
+
+  /* Animación para transformar las 3 líneas en una "X" al abrir */
+  .line1Active { transform: rotate(45deg) translate(6px, 6px); }
+  .line2Active { opacity: 0; }
+  .line3Active { transform: rotate(-45deg) translate(6px, -6px); }
+
+  /* OCULTAR EL MENÚ POR DEFECTO EN CELULARES */
+  .navbar {
+    display: none; 
+    flex-direction: column;
+    width: 100%;
+    background-color: #1a1a1a;
     padding: 10px 0;
+    transition: all 0.3s ease;
+  }
+
+  /* MOSTRAR EL MENÚ SOLO CUANDO ESTÁ ACTIVO */
+  .navbar.active {
+    display: flex;
   }
 
   .navGroup {
     width: 100%;
-    text-align: center;
   }
 
   .navLabel, .navLinkSingle {
-    padding: 12px 0;
+    padding: 15px 20px;
     border-bottom: 1px solid #262626;
     width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between; /* Deja la flechita alineada a la derecha */
   }
 
-  /* Hacemos que las subsecciones aparezcan debajo al tocar o pasar el dedo */
+  /* SUBDESGLOSES (DROPDOWNS) EN CELULAR */
+  /* Por defecto ocultos en celular, se abren elegantemente al pasar el dedo o mantener pulsado */
   .dropdown {
-    position: relative; /* Ya no flota sobre el contenido */
+    position: relative;
     width: 100%;
+    background-color: #262626;
     box-shadow: none;
     border-top: none;
-    background-color: #262626; /* Un tono un poco más claro para diferenciar */
+    display: none; /* Se oculta dentro del menú */
   }
 
-  /* Ajustamos la sección principal (Hero) */
-  .hero {
-    height: 40vh; /* Más baja en celulares */
+  /* Cuando el usuario interactúa con la sección (Raza, Salud, etc.), despliega sus hijos hacia abajo */
+  .navGroup:hover .dropdown {
+    display: block;
   }
 
-  .heroOverlay h2 {
-    font-size: 1.6rem;
+  .dropdown a {
+    padding: 12px 35px; /* Más sangría para que se note que están dentro */
+    border-bottom: 1px solid #333;
+    color: #bbb;
   }
 
-  .heroOverlay p {
-    font-size: 0.9rem;
-  }
+  /* Ajustes del resto de la página */
+  .hero { height: 35vh; }
+  .heroOverlay h2 { font-size: 1.5rem; }
+  .heroOverlay p { font-size: 0.85rem; }
+  .welcomeSection { padding: 30px 6%; }
 
-  /* La sección de bienvenida reduce sus márgenes */
-  .welcomeSection {
-    padding: 30px 5%;
-  }
-
-  /* ¡La magia de la grilla! Pasa de 3 columnas a 1 sola columna */
   .infoGrid {
     grid-template-columns: 1fr; 
-    padding: 10px 5% 40px 5%;
-    gap: 20px;
+    padding: 10px 6% 40px 6%;
+    gap: 25px;
   }
-  
-  .card {
-    padding: 20px;
+}
+
+/* Ocultar el botón hamburguesa por defecto en pantallas de computadora */
+@media (min-width: 769px) {
+  .hamburger {
+    display: none;
   }
 }

@@ -1,6 +1,13 @@
+// src/app/page.tsx
+"use client"; // <-- IMPORTANTE: Esto le permite a Next.js usar interactividad
+
+import { useState } from 'react';
 import styles from './principal.module.css';
 
 export default function Home() {
+  // Estado para controlar si el menú hamburguesa está abierto o cerrado
+  const [menuAbierto, setMenuAbierto] = useState(false);
+
   return (
     <div className={styles.container}>
       
@@ -13,20 +20,32 @@ export default function Home() {
         <div className={styles.logoArea}>
           <h1>BÓXER CLUB DEL PERÚ</h1>
           <p className={styles.subtitle}>Dedicados a la crianza, salud y preservación de la raza</p>
+          
+          {/* BOTÓN DE 3 LÍNEAS (Solo se verá en celulares) */}
+          <button 
+            className={styles.hamburger} 
+            onClick={() => setMenuAbierto(!menuAbierto)}
+            aria-label="Menú de navegación"
+          >
+            <div className={`${styles.line} ${menuAbierto ? styles.line1Active : ''}`}></div>
+            <div className={`${styles.line} ${menuAbierto ? styles.line2Active : ''}`}></div>
+            <div className={`${styles.line} ${menuAbierto ? styles.line3Active : ''}`}></div>
+          </button>
         </div>
 
-        <nav className={styles.navbar}>
+        {/* Agregamos una clase condicional: si menuAbierto es true, añade styles.active */}
+        <nav className={`${styles.navbar} ${menuAbierto ? styles.active : ''}`}>
           <div className={styles.navGroup}>
-            <span className={styles.navLabel}>Raza</span>
+            <span className={styles.navLabel}>Raza ▾</span>
             <div className={styles.dropdown}>
-              <a href="/raza/estandar">Estándar Oficial</a>
+              <a href="/raza/estandar">Estándar</a>
               <a href="/raza/historia">Historia de la Raza</a>
               <a href="/raza/mejor-raza">La Mejor Raza del Mundo</a>
             </div>
           </div>
 
           <div className={styles.navGroup}>
-            <span className={styles.navLabel}>Salud</span>
+            <span className={styles.navLabel}>Salud ▾</span>
             <div className={styles.dropdown}>
               <a href="/salud/enfermedades">Enfermedades Comunes</a>
               <a href="/salud/cuidados">Cuidado del Bóxer</a>
@@ -34,34 +53,56 @@ export default function Home() {
           </div>
 
           <div className={styles.navGroup}>
-            <span className={styles.navLabel}>Actividades</span>
+            <span className={styles.navLabel}>Actividades ▾</span>
             <div className={styles.dropdown}>
-              <a href="/actividades/calendario">Calendario</a>
-              <a href="/actividades/agilidad">Agilidad y Trabajo</a>
-              <a href="/actividades/encuentros">Caminatas y Encuentros</a>
+              <a href="/actividades/agilidad">Agilidad</a>
+              <a href="/actividades/match">Match</a>
+              <a href="/actividades/fotografia">Concurso de fotografías</a>
+              <a href="/actividades/caminatas">Caminatas</a>
+              <a href="/actividades/encuentros">Encuentros</a>
+              <a href="/actividades/calendario">Calendario de actividades</a>
             </div>
           </div>
 
           <div className={styles.navGroup}>
-            <span className={styles.navLabel}>Eventos</span>
+            <span className={styles.navLabel}>Eventos ▾</span>
             <div className={styles.dropdown}>
               <a href="/eventos/especializadas">Especializadas</a>
               <a href="/eventos/match">Match</a>
               <a href="/eventos/ranking">Bóxer del Año (KCP)</a>
+              <a href="/actividades/macho">Bóxer macho del año</a>
+              <a href="/actividades/hembra">Bóxer hembra del año</a>
+              <a href="/actividades/joven">Bóxer joven del año</a>
             </div>
           </div>
 
           <div className={styles.navGroup}>
-            <span className={styles.navLabel}>Camadas</span>
+            <span className={styles.navLabel}>Camadas ▾</span>
             <div className={styles.dropdown}>
+              <a href="/camadas/preguntas">Preguntas frecuentes</a>
               <a href="/camadas/buscar">Encontrar Cachorro</a>
               <a href="/camadas/criadores">Criadores Oficiales</a>
               <a href="/camadas/montas">Servicios de Monta</a>
             </div>
           </div>
 
-          <a href="/tienda/articulos" className={styles.navLinkSingle}>Tienda</a>
-          <a href="/nosotros/contacto" className={styles.navLinkSingle}>Nosotros</a>
+          <div className={styles.navGroup}>
+            <span className={styles.navLabel}>Tienda ▾</span>
+            <div className={styles.dropdown}>
+              <a href="/camadas/articulos">Artículos</a>
+              <a href="/camadas/comidas">Comidas</a>
+              <a href="/camadas/suplementos">Suplementos</a>
+            </div>
+          </div>
+
+          <div className={styles.navGroup}>
+            <span className={styles.navLabel}>Nosotros ▾</span>
+            <div className={styles.dropdown}>
+              <a href="/camadas/consejo">Concejo directivo</a>
+              <a href="/camadas/historia">Historia del Bóxer club del Perú</a>
+              <a href="/camadas/contactanos">Contáctanos</a>
+            </div>
+          </div>
         </nav>
       </header>
 
