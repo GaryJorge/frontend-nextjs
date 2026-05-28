@@ -91,6 +91,8 @@ export default function Home() {
       <main className={styles.infoGrid}>
         <div className={styles.card}>
           <div className={styles.cardBadge}>Ranking KCP</div>
+          {/* AGREGAMOS LA IMAGEN AQUÍ */}
+          <img src="/ranking.jpg" alt="Ranking Boxer" className={styles.cardImage} />
           <h4>Ejemplares del Año</h4>
           <p>Conoce a los máximos exponentes de la raza en las categorías Macho, Hembra y Joven del Año según el puntaje oficial.</p>
           <a href="/eventos/ranking" className={styles.cardLink}>Ver Ganadores →</a>
@@ -98,6 +100,8 @@ export default function Home() {
 
         <div className={styles.card}>
           <div className={styles.cardBadge}>Crianza Responsable</div>
+          {/* AGREGAMOS LA IMAGEN AQUÍ */}
+          <img src="/camadas.jpg" alt="Camadas Boxer" className={styles.cardImage} />
           <h4>Próximas Camadas</h4>
           <p>¿Buscas un cachorro? Accede de manera segura a criadores certificados que priorizan la salud y el temperamento.</p>
           <a href="/camadas/buscar" className={styles.cardLink}>Buscar Cachorro →</a>
@@ -105,6 +109,8 @@ export default function Home() {
 
         <div className={styles.card}>
           <div className={styles.cardBadge}>Comunidad</div>
+          {/* AGREGAMOS LA IMAGEN AQUÍ */}
+          <img src="/actividades.jpg" alt="Actividades Boxer" className={styles.cardImage} />
           <h4>Calendario de Actividades</h4>
           <p>Entérate de nuestras próximas caminatas grupales, encuentros de socialización y competencias de agilidad en Lima.</p>
           <a href="/actividades/calendario" className={styles.cardLink}>Ver Fechas →</a>
