@@ -1,29 +1,40 @@
 "use client";
 
 import React, { useState } from 'react';
-// Importamos el CSS subiendo dos niveles desde la carpeta 'preguntas'
-// Asegúrate de que el nombre coincida exactamente con tu archivo físico
+// Importación del CSS subiendo dos niveles (de preguntas -> camadas -> app)
 import styles from '../../principal.module.css';
 
+// Datos de las preguntas frecuentes (Fácil de editar o conectar a una API después)
 const FAQ_DATA = [
   {
     id: 1,
-    pregunta: "¿Cómo registro una nueva camada en el Club?",
-    respuesta: "Para registrar una camada, ambos padres deben tener su pedigree oficial del KCP y el criador debe presentar el certificado de monta y nacimiento dentro de los plazos establecidos."
+    pregunta: "¿Cómo puedo registrar una camada ante el Club?",
+    respuesta: "Para registrar una camada, ambos padres deben contar con su pedigree oficial emitido por el Kennel Club Peruano (KCP). El criador debe presentar el certificado de monta y nacimiento dentro de los plazos establecidos por el reglamento de crianza."
   },
   {
     id: 2,
-    pregunta: "¿Qué requisitos de salud se exigen para los reproductores?",
-    respuesta: "El Bóxer Club del Perú recomienda pruebas de displasia de cadera y exámenes cardiológicos para asegurar la salud de las futuras generaciones."
+    pregunta: "¿Qué requisitos de salud deben tener los padres?",
+    respuesta: "El Bóxer Club del Perú promueve la crianza responsable. Se recomienda que los reproductores tengan placas de displasia de cadera con resultado 'A' o 'B' y exámenes cardiológicos (Ecocardiograma Doppler) para descartar estenosis aórtica o pulmonar."
   },
   {
     id: 3,
-    pregunta: "¿El Club vende cachorros directamente?",
-    respuesta: "No, el Club no vende ejemplares. Facilitamos el contacto entre criadores oficiales socios y posibles propietarios para fomentar la crianza ética."
+    pregunta: "¿A qué edad puedo separar un cachorro de su madre?",
+    respuesta: "Por bienestar animal y una correcta socialización, los cachorros no deben ser entregados antes de las 8 o 9 semanas de vida. Para esa fecha, ya deben contar con su primera vacunación y desparasitación al día."
+  },
+  {
+    id: 4,
+    pregunta: "¿Cómo verifico si un criador es oficial?",
+    respuesta: "Puede consultar nuestra sección de 'Criadores Oficiales' en este sitio web. Todos los criadores listados son socios activos que han registrado su afijo ante el KCP y se comprometen a seguir el código de ética del Club."
+  },
+  {
+    id: 5,
+    pregunta: "¿Qué documentos debo recibir al comprar un cachorro?",
+    respuesta: "El criador debe entregarte el Certificado de Origen (Pedigree) o el documento de transferencia oficial firmado. Además, debe entregarte una cartilla de vacunación firmada por un médico veterinario colegiado."
   }
 ];
 
 export default function PreguntasPage() {
+  // Estado para controlar qué pregunta está abierta
   const [abierto, setAbierto] = useState<number | null>(null);
 
   const toggleFAQ = (id: number) => {
@@ -31,30 +42,36 @@ export default function PreguntasPage() {
   };
 
   return (
-    <div className={styles.container}>
-      {/* Encabezado */}
-      <header className={styles.welcomeSection}>
+    <main className={styles.container}>
+      {/* SECCIÓN DE ENCABEZADO */}
+      <section className={styles.welcomeSection}>
         <div className={styles.welcomeText}>
           <h3>Preguntas Frecuentes</h3>
           <div style={{ 
             width: '60px', 
             height: '3px', 
             backgroundColor: '#c5a059', 
-            margin: '0 auto 20px' 
+            margin: '10px auto 20px' 
           }}></div>
-          <p>Resuelve tus dudas sobre la crianza, registros y adquisición de ejemplares Bóxer.</p>
+          <p>
+            Encuentra respuestas a las dudas más comunes sobre la raza, la adquisición de cachorros 
+            y los trámites ante el Bóxer Club del Perú.
+          </p>
         </div>
-      </header>
+      </section>
 
-      {/* Lista de Preguntas */}
-      <main style={{ maxWidth: '800px', margin: '0 auto 60px auto', padding: '0 20px' }}>
+      {/* CONTENEDOR DE PREGUNTAS (TIPO ACORDEÓN) */}
+      <section style={{ maxWidth: '850px', margin: '0 auto 80px auto', padding: '0 20px' }}>
         {FAQ_DATA.map((item) => (
           <div 
             key={item.id} 
             style={{ 
-              borderBottom: '1px solid #eee', 
-              marginBottom: '10px',
-              backgroundColor: '#fff' 
+              marginBottom: '15px', 
+              border: '1px solid #eee', 
+              borderRadius: '4px',
+              overflow: 'hidden',
+              backgroundColor: '#fff',
+              boxShadow: '0 2px 5px rgba(0,0,0,0.02)'
             }}
           >
             <button
@@ -63,40 +80,62 @@ export default function PreguntasPage() {
                 width: '100%',
                 padding: '20px',
                 textAlign: 'left',
-                background: 'none',
+                background: abierto === item.id ? '#fdfaf4' : 'white',
                 border: 'none',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 cursor: 'pointer',
-                fontWeight: 'bold',
-                color: '#4a0404', // Color guinda institucional
-                fontSize: '1rem'
+                transition: 'background 0.3s ease'
               }}
             >
-              {item.pregunta}
-              <span style={{ color: '#c5a059' }}>{abierto === item.id ? '−' : '+'}</span>
+              <span style={{ 
+                fontWeight: 'bold', 
+                color: '#4a0404', 
+                fontSize: '1rem',
+                fontFamily: 'Arial, sans-serif'
+              }}>
+                {item.pregunta}
+              </span>
+              <span style={{ 
+                color: '#c5a059', 
+                fontSize: '1.4rem',
+                fontWeight: 'bold'
+              }}>
+                {abierto === item.id ? '−' : '+'}
+              </span>
             </button>
             
+            {/* Respuesta animada/condicional */}
             {abierto === item.id && (
               <div style={{ 
                 padding: '0 20px 20px 20px', 
-                color: '#666', 
-                lineHeight: '1.6',
-                fontSize: '0.95rem'
+                color: '#555', 
+                lineHeight: '1.7',
+                fontSize: '0.95rem',
+                backgroundColor: '#fdfaf4',
+                borderTop: '1px solid #f2ede4'
               }}>
                 {item.respuesta}
               </div>
             )}
           </div>
         ))}
-      </main>
 
-      {/* Footer Simple */}
-      <footer className={styles.footer}>
-        <p>¿Tienes más dudas? Contáctanos a través de nuestras redes oficiales.</p>
-        <div className={styles.footerNote}>Bóxer Club del Perú</div>
-      </footer>
-    </div>
+        {/* BOTÓN DE CONTACTO ADICIONAL */}
+        <div style={{ textAlign: 'center', marginTop: '40px' }}>
+          <p style={{ color: '#888', fontSize: '0.9rem', marginBottom: '15px' }}>
+            ¿No encontraste lo que buscabas?
+          </p>
+          <a 
+            href="/nosotros/contactanos" 
+            className={styles.btnGold}
+            style={{ textDecoration: 'none', display: 'inline-block' }}
+          >
+            Escríbenos directamente
+          </a>
+        </div>
+      </section>
+    </main>
   );
 }
