@@ -263,29 +263,27 @@
   margin-bottom: 15px;
 }
 /* =======================================================
-   ESTILOS RESPONSIVOS MEJORADOS CON MENÚ HAMBURGUESA
+   ESTILOS RESPONSIVOS - OPTIMIZADOS PARA HOSTING
    ======================================================= */
 @media (max-width: 768px) {
   
   .logoArea {
-    position: relative; /* Para poder posicionar el botón a la derecha */
+    position: relative; 
     padding-bottom: 25px;
   }
 
   .logoArea h1 {
     font-size: 1.5rem; 
-    letter-spacing: 1px;
-    padding-right: 50px; /* Evita que el texto choque con el botón */
+    padding-right: 55px; 
     text-align: left;
   }
   
   .subtitle {
     font-size: 0.75rem;
-    letter-spacing: 0px;
     text-align: left;
   }
 
-  /* DISEÑO DEL BOTÓN DE 3 LÍNEAS */
+  /* BOTÓN HAMBURGUESA */
   .hamburger {
     display: flex;
     flex-direction: column;
@@ -304,81 +302,74 @@
   .line {
     width: 30px;
     height: 3px;
-    background-color: #4a0404; /* Color guinda para combinar */
+    background-color: #4a0404;
     transition: all 0.3s ease;
   }
 
-  /* Animación para transformar las 3 líneas en una "X" al abrir */
   .line1Active { transform: rotate(45deg) translate(6px, 6px); }
   .line2Active { opacity: 0; }
   .line3Active { transform: rotate(-45deg) translate(6px, -6px); }
 
-  /* OCULTAR EL MENÚ POR DEFECTO EN CELULARES */
+  /* NAVEGACIÓN MÓVIL */
   .navbar {
     display: none; 
     flex-direction: column;
     width: 100%;
     background-color: #1a1a1a;
-    padding: 10px 0;
-    transition: all 0.3s ease;
   }
 
-  /* MOSTRAR EL MENÚ SOLO CUANDO ESTÁ ACTIVO */
   .navbar.active {
-    display: flex;
+    display: flex; 
   }
 
-  .navGroup {
-    width: 100%;
-  }
-
-  .navLabel, .navLinkSingle {
+  .navLabel {
     padding: 15px 20px;
     border-bottom: 1px solid #262626;
-    width: 100%;
-    box-sizing: border-box;
     display: flex;
-    justify-content: space-between; /* Deja la flechita alineada a la derecha */
+    justify-content: space-between;
+    cursor: pointer;
+    color: #fff;
+    font-family: Arial, sans-serif;
   }
 
-  /* SUBDESGLOSES (DROPDOWNS) EN CELULAR */
-  /* Por defecto ocultos en celular, se abren elegantemente al pasar el dedo o mantener pulsado */
+  /* SUBMENÚS (DROPDOWNS) */
   .dropdown {
     position: relative;
     width: 100%;
     background-color: #262626;
-    box-shadow: none;
-    border-top: none;
-    display: none; /* Se oculta dentro del menú */
+    display: none; /* Se oculta por defecto */
   }
 
-  /* Cuando el usuario interactúa con la sección (Raza, Salud, etc.), despliega sus hijos hacia abajo */
-  .navGroup:hover .dropdown {
-    display: block;
+  /* REEMPLAZO CLAVE: Solo se muestra si React añade esta clase */
+  .dropdown.dropdownOpen {
+    display: block !important;
   }
 
   .dropdown a {
-    padding: 12px 35px; /* Más sangría para que se note que están dentro */
-    border-bottom: 1px solid #333;
+    display: block;
+    padding: 12px 35px;
     color: #bbb;
-  }
-
-  /* Ajustes del resto de la página */
-  .hero { height: 35vh; }
-  .heroOverlay h2 { font-size: 1.5rem; }
-  .heroOverlay p { font-size: 0.85rem; }
-  .welcomeSection { padding: 30px 6%; }
-
-  .infoGrid {
-    grid-template-columns: 1fr; 
-    padding: 10px 6% 40px 6%;
-    gap: 25px;
+    text-decoration: none;
+    border-bottom: 1px solid #333;
+    font-size: 0.9rem;
   }
 }
 
-/* Ocultar el botón hamburguesa por defecto en pantallas de computadora */
+/* AJUSTES PARA ESCRITORIO (PC) */
 @media (min-width: 769px) {
-  .hamburger {
+  .hamburger { display: none; }
+
+  .dropdown {
     display: none;
+    position: absolute;
+    background-color: #1a1a1a;
+    min-width: 200px;
+    z-index: 10;
+    border-top: 2px solid #c5a059;
+  }
+
+  /* También en PC usamos la clase de React para el clic */
+  .dropdown.dropdownOpen {
+    display: block;
   }
 }

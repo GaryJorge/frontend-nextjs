@@ -1,12 +1,24 @@
-// src/app/page.tsx
+/// src/app/page.tsx
 "use client"; // <-- IMPORTANTE: Esto le permite a Next.js usar interactividad
 
 import { useState } from 'react';
 import styles from './principal.module.css';
 
 export default function Home() {
-  // Estado para controlar si el menú hamburguesa está abierto o cerrado
+  // Estado para controlar si el menú hamburguesa general está abierto o cerrado
   const [menuAbierto, setMenuAbierto] = useState(false);
+
+  // Estado para rastrear qué submenú específico está abierto ('raza', 'salud', 'actividades', etc.)
+  const [submenuActivo, setSubmenuActivo] = useState<string | null>(null);
+
+  // Función lógica para alternar los submenús al hacer clic
+  const toggleSubmenu = (nombreMenu: string) => {
+    if (submenuActivo === nombreMenu) {
+      setSubmenuActivo(null); // Si ya estaba abierto, dale clic de nuevo para cerrarlo
+    } else {
+      setSubmenuActivo(nombreMenu); // Si estaba cerrado, ábrelo y cierra cualquier otro que estuviera abierto
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -24,7 +36,10 @@ export default function Home() {
           {/* BOTÓN DE 3 LÍNEAS (Solo se verá en celulares) */}
           <button 
             className={styles.hamburger} 
-            onClick={() => setMenuAbierto(!menuAbierto)}
+            onClick={() => {
+              setMenuAbierto(!menuAbierto);
+              setSubmenuActivo(null); // Resetea y cierra los submenús si se cierra todo el menú móvil
+            }}
             aria-label="Menú de navegación"
           >
             <div className={`${styles.line} ${menuAbierto ? styles.line1Active : ''}`}></div>
@@ -35,26 +50,36 @@ export default function Home() {
 
         {/* Agregamos una clase condicional: si menuAbierto es true, añade styles.active */}
         <nav className={`${styles.navbar} ${menuAbierto ? styles.active : ''}`}>
+          
+          {/* RAZA */}
           <div className={styles.navGroup}>
-            <span className={styles.navLabel}>Raza ▾</span>
-            <div className={styles.dropdown}>
+            <span className={styles.navLabel} onClick={() => toggleSubmenu('raza')}>
+              Raza {submenuActivo === 'raza' ? '▴' : '▾'}
+            </span>
+            <div className={`${styles.dropdown} ${submenuActivo === 'raza' ? styles.dropdownOpen : ''}`}>
               <a href="/raza/estandar">Estándar</a>
               <a href="/raza/historia">Historia de la Raza</a>
               <a href="/raza/mejor-raza">La Mejor Raza del Mundo</a>
             </div>
           </div>
 
+          {/* SALUD */}
           <div className={styles.navGroup}>
-            <span className={styles.navLabel}>Salud ▾</span>
-            <div className={styles.dropdown}>
+            <span className={styles.navLabel} onClick={() => toggleSubmenu('salud')}>
+              Salud {submenuActivo === 'salud' ? '▴' : '▾'}
+            </span>
+            <div className={`${styles.dropdown} ${submenuActivo === 'salud' ? styles.dropdownOpen : ''}`}>
               <a href="/salud/enfermedades">Enfermedades Comunes</a>
               <a href="/salud/cuidados">Cuidado del Bóxer</a>
             </div>
           </div>
 
+          {/* ACTIVIDADES */}
           <div className={styles.navGroup}>
-            <span className={styles.navLabel}>Actividades ▾</span>
-            <div className={styles.dropdown}>
+            <span className={styles.navLabel} onClick={() => toggleSubmenu('actividades')}>
+              Actividades {submenuActivo === 'actividades' ? '▴' : '▾'}
+            </span>
+            <div className={`${styles.dropdown} ${submenuActivo === 'actividades' ? styles.dropdownOpen : ''}`}>
               <a href="/actividades/agilidad">Agilidad</a>
               <a href="/actividades/match">Match</a>
               <a href="/actividades/fotografia">Concurso de fotografías</a>
@@ -64,9 +89,12 @@ export default function Home() {
             </div>
           </div>
 
+          {/* EVENTOS */}
           <div className={styles.navGroup}>
-            <span className={styles.navLabel}>Eventos ▾</span>
-            <div className={styles.dropdown}>
+            <span className={styles.navLabel} onClick={() => toggleSubmenu('eventos')}>
+              Eventos {submenuActivo === 'eventos' ? '▴' : '▾'}
+            </span>
+            <div className={`${styles.dropdown} ${submenuActivo === 'eventos' ? styles.dropdownOpen : ''}`}>
               <a href="/eventos/especializadas">Especializadas</a>
               <a href="/eventos/match">Match</a>
               <a href="/eventos/ranking">Bóxer del Año (KCP)</a>
@@ -76,9 +104,12 @@ export default function Home() {
             </div>
           </div>
 
+          {/* CAMADAS */}
           <div className={styles.navGroup}>
-            <span className={styles.navLabel}>Camadas ▾</span>
-            <div className={styles.dropdown}>
+            <span className={styles.navLabel} onClick={() => toggleSubmenu('camadas')}>
+              Camadas {submenuActivo === 'camadas' ? '▴' : '▾'}
+            </span>
+            <div className={`${styles.dropdown} ${submenuActivo === 'camadas' ? styles.dropdownOpen : ''}`}>
               <a href="/camadas/preguntas">Preguntas frecuentes</a>
               <a href="/camadas/buscar">Encontrar Cachorro</a>
               <a href="/camadas/criadores">Criadores Oficiales</a>
@@ -86,18 +117,24 @@ export default function Home() {
             </div>
           </div>
 
+          {/* TIENDA */}
           <div className={styles.navGroup}>
-            <span className={styles.navLabel}>Tienda ▾</span>
-            <div className={styles.dropdown}>
+            <span className={styles.navLabel} onClick={() => toggleSubmenu('tienda')}>
+              Tienda {submenuActivo === 'tienda' ? '▴' : '▾'}
+            </span>
+            <div className={`${styles.dropdown} ${submenuActivo === 'tienda' ? styles.dropdownOpen : ''}`}>
               <a href="/camadas/articulos">Artículos</a>
               <a href="/camadas/comidas">Comidas</a>
               <a href="/camadas/suplementos">Suplementos</a>
             </div>
           </div>
 
+          {/* NOSOTROS */}
           <div className={styles.navGroup}>
-            <span className={styles.navLabel}>Nosotros ▾</span>
-            <div className={styles.dropdown}>
+            <span className={styles.navLabel} onClick={() => toggleSubmenu('nosotros')}>
+              Nosotros {submenuActivo === 'nosotros' ? '▴' : '▾'}
+            </span>
+            <div className={`${styles.dropdown} ${submenuActivo === 'nosotros' ? styles.dropdownOpen : ''}`}>
               <a href="/camadas/consejo">Concejo directivo</a>
               <a href="/camadas/historia">Historia del Bóxer club del Perú</a>
               <a href="/camadas/contactanos">Contáctanos</a>
@@ -127,11 +164,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CUADROS DESTACADOS (PREPARADOS PARA HACERSE DINÁMICOS DESPUÉS) */}
+      {/* CUADROS DESTACADOS */}
       <main className={styles.infoGrid}>
         <div className={styles.card}>
           <div className={styles.cardBadge}>Ranking KCP</div>
-          {/* AGREGAMOS LA IMAGEN AQUÍ */}
           <img src="/ranking.jpg" alt="Ranking Boxer" className={styles.cardImage} />
           <h4>Ejemplares del Año</h4>
           <p>Conoce a los máximos exponentes de la raza en las categorías Macho, Hembra y Joven del Año según el puntaje oficial.</p>
@@ -140,7 +176,6 @@ export default function Home() {
 
         <div className={styles.card}>
           <div className={styles.cardBadge}>Crianza Responsable</div>
-          {/* AGREGAMOS LA IMAGEN AQUÍ */}
           <img src="/camadas.jpg" alt="Camadas Boxer" className={styles.cardImage} />
           <h4>Próximas Camadas</h4>
           <p>¿Buscas un cachorro? Accede de manera segura a criadores certificados que priorizan la salud y el temperamento.</p>
@@ -149,7 +184,6 @@ export default function Home() {
 
         <div className={styles.card}>
           <div className={styles.cardBadge}>Comunidad</div>
-          {/* AGREGAMOS LA IMAGEN AQUÍ */}
           <img src="/actividades.jpg" alt="Actividades Boxer" className={styles.cardImage} />
           <h4>Calendario de Actividades</h4>
           <p>Entérate de nuestras próximas caminatas grupales, encuentros de socialización y competencias de agilidad en Lima.</p>
@@ -159,8 +193,8 @@ export default function Home() {
 
       {/* PIE DE PÁGINA (FOOTER) */}
       <footer className={styles.footer}>
-        <p>&copy; {new Date().getFullYear()} Bóxer Club del Perú. Diseñado con orgullo en Perú.</p>
-        <p className={styles.footerNote}>Sede Informativa - Consejo Directivo</p>
+        <p>&copy; {new Date().getFullYear()} Bóxer Club del Perú.</p>
+        <p className={styles.footerNote}>Sede Informativa</p>
       </footer>
 
     </div>
