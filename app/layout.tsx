@@ -77,7 +77,7 @@ export default function RootLayout({
               </span>
               <div className={`${styles.dropdown} ${submenuActivo === 'actividades' ? styles.dropdownOpen : ''}`}>
                 <a href="/actividades/agilidad">Agilidad</a>
-                <a href="/actividades/match">Match</a>
+                <a href="/actividades/trabajo">Trabajo</a>
                 <a href="/actividades/fotografia">Concurso de fotografías</a>
                 <a href="/actividades/caminatas">Caminatas</a>
                 <a href="/actividades/encuentros">Encuentros</a>
@@ -93,10 +93,9 @@ export default function RootLayout({
               <div className={`${styles.dropdown} ${submenuActivo === 'eventos' ? styles.dropdownOpen : ''}`}>
                 <a href="/eventos/especializadas">Especializadas</a>
                 <a href="/eventos/match">Match</a>
-                <a href="/eventos/ranking">Bóxer del Año (KCP)</a>
-                <a href="/eventos/macho">Bóxer macho del año</a>
-                <a href="/eventos/hembra">Bóxer hembra del año</a>
-                <a href="/eventos/joven">Bóxer joven del año</a>
+                <a href="/eventos/macho">Bóxer macho del año (según KCP)</a>
+                <a href="/eventos/hembra">Bóxer hembra del año (según KCP)</a>
+                <a href="/eventos/joven">Bóxer joven del año (según KCP)</a>
               </div>
             </div>
 
