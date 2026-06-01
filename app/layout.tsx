@@ -66,7 +66,7 @@ export default function RootLayout({
               </span>
               <div className={`${styles.dropdown} ${submenuActivo === 'salud' ? styles.dropdownOpen : ''}`}>
                 <a href="/salud/enfermedades">Enfermedades Comunes</a>
-                <a href="/salud/cuidados">Cuidado del Bóxer</a>
+                <a href="/salud/cuidado">Cuidado del Bóxer</a>
               </div>
             </div>
 
